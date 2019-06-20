@@ -19,7 +19,7 @@
     <AddTeam />
   </div>
 
-  {#each Object.keys($teams) as teamId}
-    <Team {teamId} />
+  {#each $teams as { id }}
+    <Team teamId={id} />
   {/each}
 </section>

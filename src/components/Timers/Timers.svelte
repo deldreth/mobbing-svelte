@@ -25,16 +25,17 @@
   }
 </style>
 
-<section>
+<section data-cy="timer">
   <label>{timer.label}</label>
   <div class="group">
-    <div
+    <button
       on:click={handleDecrement}
       class="nes-btn"
       type="button"
-      id="button-addon1">
+      id="button-addon1"
+      data-cy={`timer-${key}-minus-button`}>
       <i class="fas fa-minus fa-fw" />
-    </div>
+    </button>
 
     <input
       value={`${timer.value} ${timer.suffix}`}
@@ -43,13 +44,15 @@
       class="nes-input"
       placeholder=""
       aria-label="Example text with button addon"
-      aria-describedby="button-addon1" />
+      aria-describedby="button-addon1"
+      data-cy={`timer-${key}-input`} />
 
     <button
       on:click={handleIncrement}
       class="nes-btn"
       type="button"
-      id="button-addon2">
+      id="button-addon2"
+      data-cy={`timer-${key}-plus-button`}>
       <i class="fas fa-plus fa-fw" />
     </button>
   </div>

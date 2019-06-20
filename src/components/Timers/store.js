@@ -1,9 +1,11 @@
 import { writable } from "svelte/store";
 
 import { adjustTimer, preStartTimer } from "./utils";
-import { teams } from "../Team/store";
+import { displayNotification } from "../../utils/notifications";
 import persistStore from "../../utils/persistStore";
 import tick from "../../utils/tick";
+
+typeof Notification !== "undefined" && Notification.requestPermission();
 
 function createTimers() {
   const defaults = {
@@ -45,15 +47,11 @@ function createTimers() {
     set,
     subscribe,
     start: async (teamId, onSessionDone, opts = timerOpts) => {
-      const serviceWorker = await navigator.serviceWorker.getRegistration();
-
       timerWorker.addEventListener("message", event => {
         update(timers => ({ ...timers, ...event.data }));
 
         if (event.data.remainder === 0) {
-          serviceWorker.showNotification("Mobbing", {
-            body: "Your time is up"
-          });
+          displayNotification("Your time is up!");
           onSessionDone();
         }
       });
@@ -70,6 +68,7 @@ function createTimers() {
         update(timers => ({ ...timers, ...event.data }));
 
         if (event.data.remainder === 0) {
+          displayNotification("Break is over!");
           onBreakDone();
         }
       });

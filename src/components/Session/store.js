@@ -45,8 +45,8 @@ export const session = persistStore(createSession(), "session");
 export const selectedTeamMembers = derived(
   [session, teams],
   ([$session, $teams]) => {
-    if ($session.teamId && $teams[$session.teamId]) {
-      return $teams[$session.teamId].members;
+    if ($session.teamId) {
+      return $teams.find(team => team.id === $session.teamId).members;
     }
 
     return null;

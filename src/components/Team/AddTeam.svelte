@@ -2,6 +2,8 @@
   import { teams } from "./store";
   import { session } from "../Session/store";
 
+  import Quote from "../Quote";
+
   let newTeamName = "";
 
   function handleChange(event) {
@@ -44,7 +46,8 @@
       class="nes-input"
       id="add-team-member"
       aria-describedby="button-add-member"
-      placeholder="New team" />
+      placeholder="New team"
+      data-cy="add-team-input" />
   </div>
 
   <button
@@ -52,7 +55,8 @@
     on:click={handleAddTeam}
     class={`nes-btn ${newTeamName === '' ? 'is-disabled' : 'is-primary'}`}
     type="button"
-    id="button-add-member">
+    id="button-add-member"
+    data-cy="add-team-button">
     Add Team
   </button>
 </div>

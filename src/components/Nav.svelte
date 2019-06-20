@@ -1,5 +1,6 @@
 <script>
   import { session, TYPE_INACTIVE } from "./Session/store";
+  import { teams } from "./Team/store";
 
   export let segment;
 </script>
@@ -28,13 +29,15 @@
           Mobbing
         </a>
       </li>
-      <li class="nav-item">
-        <a
-          class={segment === 'teams' ? 'active nav-link' : 'nav-link'}
-          href="teams">
-          Teams
-        </a>
-      </li>
+      {#if $teams.length > 0}
+        <li class="nav-item">
+          <a
+            class={segment === 'teams' ? 'active nav-link' : 'nav-link'}
+            href="teams">
+            Teams
+          </a>
+        </li>
+      {/if}
     {/if}
   </ul>
 </nav>

@@ -8,7 +8,7 @@
 
   export let teamId;
 
-  $: team = $teams[teamId];
+  $: team = $teams.find(team => team.id === teamId);
 
   function toggleEditing() {
     if (team.editing) {
@@ -20,6 +20,10 @@
 
   function handleRemove() {
     teams.removeTeam(teamId);
+
+    if ($session.teamId && $session.teamId === teamId) {
+      session.pickTeam(null);
+    }
   }
 
   function handleSelectTeam() {
@@ -33,7 +37,7 @@
 </script>
 
 <style>
-  #team {
+  .team {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
@@ -57,9 +61,9 @@
   }
 </style>
 
-<div class="nes-container with-title">
+<div class="nes-container with-title" data-cy="team-container">
   <div class="title">{team.name}</div>
-  <div id="team">
+  <div class="team">
     {#if team.editing}
       <div class="nes-field">
         <label for="team-name">Team name</label>
@@ -67,49 +71,69 @@
           bind:value={team.name}
           id="team-name"
           type="text"
-          class="nes-input edit-name" />
+          class="nes-input edit-name"
+          data-cy="team-name-input" />
       </div>
 
       <AddMember {teamId} />
     {/if}
 
-    <table class="nes-table is-centered" width="99%">
-      <thead>
-        <tr>
-          <th>Members</th>
-          {#if team.editing}
-            <th>Remove</th>
-          {/if}
-        </tr>
-      </thead>
-      <tbody>
-        {#each team.members as member, i}
+    {#if team.members.length > 0}
+      <table class="nes-table is-centered" width="99%">
+        <thead>
           <tr>
-            <td>{member.name}</td>
+            <th>Members</th>
             {#if team.editing}
-              <td class="text-right">
-                <button
-                  on:click={() => handleRemoveMember(member.id)}
-                  class="nes-btn is-warning btn-sm">
-                  Remove
-                </button>
-              </td>
+              <th>Remove</th>
             {/if}
           </tr>
-        {/each}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {#each team.members as member, i}
+            <tr>
+              <td>{member.name}</td>
+              {#if team.editing}
+                <td class="text-right">
+                  <button
+                    on:click={() => handleRemoveMember(member.id)}
+                    class="nes-btn is-warning btn-sm"
+                    data-cy="remove-team-member">
+                    Remove
+                  </button>
+                </td>
+              {/if}
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    {/if}
 
     <div class="actions">
       {#if !team.editing}
-        <button on:click={toggleEditing} class="nes-btn">Edit</button>
+        <button
+          on:click={toggleEditing}
+          class="nes-btn"
+          data-cy="edit-team-button">
+          Edit
+        </button>
 
-        <button on:click={handleSelectTeam} class="nes-btn is-primary">
+        <button
+          on:click={handleSelectTeam}
+          class="nes-btn is-primary"
+          data-cy="mob-team-button">
           Mob with Team
         </button>
       {:else}
-        <button on:click={handleRemove} class="nes-btn is-error">Delete</button>
-        <button on:click={toggleEditing} class="nes-btn is-primary">
+        <button
+          on:click={handleRemove}
+          class="nes-btn is-error"
+          data-cy="delete-team-button">
+          Delete
+        </button>
+        <button
+          on:click={toggleEditing}
+          class="nes-btn is-primary"
+          data-cy="save-team-button">
           Save
         </button>
       {/if}

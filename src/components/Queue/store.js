@@ -11,8 +11,8 @@ export const queue = derived(
 
     const members = [];
 
-    if (teamId && $teams[teamId]) {
-      const team = $teams[teamId].members;
+    if (teamId) {
+      const team = $teams.find(team => team.id === teamId).members;
 
       let place = $session.count;
       let count = $session.count * $timers.session.value;

@@ -59,9 +59,7 @@
 
 <section id="actions">
   {#if $timers.remainder === 0}
-    <button
-      on:click={handleContinue}
-      class="continue nes-btn is-primary btn-lg">
+    <button on:click={handleContinue} class="continue nes-btn is-primary">
       Continue
     </button>
   {/if}

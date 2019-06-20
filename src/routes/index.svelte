@@ -21,7 +21,9 @@
 <section id="mobbing">
   <SelectTeam />
 
-  <SelectTimes />
+  {#if $teams.length > 0}
+    <SelectTimes />
 
-  <Start />
+    <Start />
+  {/if}
 </section>

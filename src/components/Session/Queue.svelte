@@ -1,5 +1,4 @@
 <script>
-  import { teams } from "../Team/store";
   import { queue } from "../Queue/store";
 
   import Break from "./Break";

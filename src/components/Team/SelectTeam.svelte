@@ -3,6 +3,7 @@
 
   import { session, selectedTeamMembers } from "../Session/store";
   import { teams } from "../Team/store";
+  import Quote from "../Quote";
 
   function handleChangeTeam(event) {
     session.pickTeam(event.target.value);
@@ -29,27 +30,42 @@
   }
 </style>
 
-{#if Object.keys($teams).length > 0}
+{#if $teams.length > 0}
   <section id="team-select">
     <h4>Select Team</h4>
     <div class="nes-select">
-      <select value={$session.teamId} on:change={handleChangeTeam}>
-        {#each Object.keys($teams) as teamId, i}
-          <option value={teamId}>{$teams[teamId].name}</option>
+      <select
+        value={$session.teamId}
+        on:change={handleChangeTeam}
+        data-cy="team-select">
+        {#each $teams as { id, name }, i}
+          <option value={id}>{name}</option>
         {/each}
       </select>
     </div>
 
     {#if $selectedTeamMembers}
-      <div class="selected-members nes-text is-primary">
+      <div
+        class="selected-members nes-text is-primary"
+        data-cy="team-selected-members">
          {$selectedTeamMembers.map(member => member.name).join(', ')}
       </div>
     {/if}
   </section>
 {:else}
   <div class="create">
-    <button on:click={() => goto('teams')} class="nes-btn is-primary btn-lg">
+    <button
+      on:click={() => goto('teams')}
+      class="nes-btn is-primary"
+      data-cy="create-team">
       Create Team
     </button>
+
+    <Quote
+      message="Mob programming is a software development approach where the
+      whole team works on the same thing, at the same time, in the same space,
+      and at the same computer."
+      attribution="Wikipedia"
+      link="https://en.wikipedia.org/wiki/Mob_programming" />
   </div>
 {/if}

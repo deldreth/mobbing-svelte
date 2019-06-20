@@ -1,9 +1,15 @@
 <script>
   import { goto } from "@sapper/app";
 
-  import { session, TYPE_SESSION } from "../components/Session/store";
+  import {
+    session,
+    selectedTeamMembers,
+    TYPE_SESSION
+  } from "../components/Session/store";
   import { teams } from "../components/Team/store";
   import { timers } from "../components/Timers/store";
+
+  $: disabled = !$session.teamId || $selectedTeamMembers.length < 2;
 
   function startMobbing() {
     teams.shuffleMembers($session.teamId);
@@ -37,8 +43,9 @@
 <div class="start">
   <button
     on:click={startMobbing}
-    disabled={!$session.teamId}
-    class={`nes-btn btn-lg ${!$session.teamId ? 'is-disabled' : 'is-primary'}`}>
+    {disabled}
+    class={`nes-btn ${disabled ? 'is-disabled' : 'is-primary'}`}
+    data-cy="shuffle-start">
     Shuffle & Start
   </button>
 </div>

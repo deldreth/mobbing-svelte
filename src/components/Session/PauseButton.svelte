@@ -16,9 +16,7 @@
 </script>
 
 {#if $timers.paused}
-  <button class="nes-btn is-primary btn-lg" on:click={handlePlay}>
-    Continue
-  </button>
+  <button class="nes-btn is-primary" on:click={handlePlay}>Continue</button>
 {:else}
-  <button class="nes-btn btn-lg" on:click={handlePause}>Pause</button>
+  <button class="nes-btn" on:click={handlePause}>Pause</button>
 {/if}

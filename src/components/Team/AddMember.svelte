@@ -16,6 +16,7 @@
 
   function handleAddMember() {
     teams.addMember(teamId, newMemberName);
+    newMemberName = "";
   }
 </script>
 
@@ -27,7 +28,7 @@
   }
 </style>
 
-<section class="nes-container with-title is-dark">
+<section class="nes-container with-title is-dark" data-cy="add-member">
   <p class="title">Add New Member</p>
   <div id="add-member">
     <div class="nes-field">
@@ -38,7 +39,8 @@
         type="text"
         class="nes-input is-dark"
         aria-describedby="button-add-member"
-        placeholder="Name" />
+        placeholder="Name"
+        data-cy="add-member-input" />
     </div>
 
     <div class="text-right">
@@ -47,7 +49,8 @@
         class={`nes-btn ${newMemberName === '' && 'is-disabled'}`}
         type="button"
         id="button-add-member"
-        on:click={handleAddMember}>
+        on:click={handleAddMember}
+        data-cy="add-member-button">
         Add Member
       </button>
     </div>
