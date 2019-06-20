@@ -1,0 +1,24 @@
+[
+  {
+    "id": "MUgfGda1K8SJ1OzZc6Knb",
+    "name": "Awesome Team",
+    "members": [
+      { "id": "JXtGLj1Ex2oPau0_chPmj", "name": "One" },
+      { "id": "7206tFaqXPC7Clcqspe3b", "name": "Two" },
+      { "id": "kvJdiGQe9moPmcodJ3wRV", "name": "Three" },
+      { "id": "Z8VLfjYKFDupQak88wsYR", "name": "Four" }
+    ],
+    "editing": false
+  },
+  {
+    "id": "1234",
+    "name": "Second Team",
+    "members": [
+      { "id": "1", "name": "Five" },
+      { "id": "2", "name": "Six" },
+      { "id": "3", "name": "Seven" },
+      { "id": "4", "name": "Eight" }
+    ],
+    "editing": false
+  }
+]

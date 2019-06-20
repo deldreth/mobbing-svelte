@@ -1,0 +1,12 @@
+{
+  "paused": false,
+  "remainder": 0,
+  "timer": "00:00",
+  "session": { "label": "Session Time", "value": 0.1, "suffix": "minutes" },
+  "breakAfter": { "label": "Break After", "value": 4, "suffix": "sessions" },
+  "breakDuration": {
+    "label": "Break Length",
+    "value": 0.1,
+    "suffix": "minutes"
+  }
+}

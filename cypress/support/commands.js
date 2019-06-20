@@ -1,25 +1,17 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This is will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add("setTimers", () => {
+  cy.fixture("timers.json").then(fixture =>
+    window.localStorage.setItem("timers", JSON.stringify(fixture))
+  );
+});
+
+Cypress.Commands.add("setTeams", () => {
+  cy.fixture("teams.json").then(fixture =>
+    window.localStorage.setItem("teams", JSON.stringify(fixture))
+  );
+});
+
+Cypress.Commands.add("setSession", () => {
+  cy.fixture("session.json").then(fixture =>
+    window.localStorage.setItem("session", JSON.stringify(fixture))
+  );
+});
