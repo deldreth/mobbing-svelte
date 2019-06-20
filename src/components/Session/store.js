@@ -9,6 +9,7 @@ export const TYPE_BREAK = "ON_BREAK";
 
 function createSession() {
   const defaults = {
+    version: 1,
     activeType: TYPE_INACTIVE, // TYPE_INACTIVE | TYPE_SESSION | TYPE_BREAK
     count: 0,
     teamId: null,

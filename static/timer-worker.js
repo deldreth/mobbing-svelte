@@ -51,7 +51,5 @@ onmessage = function(e) {
       break;
     case "stop":
       clearInterval(tInterval);
-    default:
-      break;
   }
 };

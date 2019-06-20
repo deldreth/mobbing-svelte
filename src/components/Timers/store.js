@@ -7,8 +7,14 @@ import tick from "../../utils/tick";
 
 typeof Notification !== "undefined" && Notification.requestPermission();
 
+let timerWorker;
+if (typeof Worker !== "undefined") {
+  timerWorker = new Worker("timer-worker.js");
+}
+
 function createTimers() {
   const defaults = {
+    version: 1,
     paused: false,
     remainder: 0,
     timer: "00:00",
@@ -35,11 +41,6 @@ function createTimers() {
     resetTimer: false
   };
 
-  let timerWorker;
-  if (typeof Worker !== "undefined") {
-    timerWorker = new Worker("timer-worker.js");
-  }
-
   let innerRef;
   subscribe(val => (innerRef = val));
 
@@ -47,14 +48,18 @@ function createTimers() {
     set,
     subscribe,
     start: async (teamId, onSessionDone, opts = timerOpts) => {
-      timerWorker.addEventListener("message", event => {
+      const handleMessage = event => {
         update(timers => ({ ...timers, ...event.data }));
 
         if (event.data.remainder === 0) {
           displayNotification("Your time is up!");
           onSessionDone();
+
+          timerWorker.removeEventListener("message", handleMessage);
         }
-      });
+      };
+
+      timerWorker.addEventListener("message", handleMessage);
 
       preStartTimer(update, "session", opts);
       timerWorker.postMessage({
@@ -64,14 +69,18 @@ function createTimers() {
       });
     },
     break: (onBreakDone, opts = timerOpts) => {
-      timerWorker.addEventListener("message", event => {
+      const handleMessage = event => {
         update(timers => ({ ...timers, ...event.data }));
 
         if (event.data.remainder === 0) {
           displayNotification("Break is over!");
           onBreakDone();
+
+          timerWorker.removeEventListener("message", handleMessage);
         }
-      });
+      };
+
+      timerWorker.addEventListener("message", handleMessage);
 
       preStartTimer(update, "breakDuration", opts);
       timerWorker.postMessage({
