@@ -17,7 +17,7 @@
   function handleRemove() {
     teams.removeTeam(team.id);
 
-    if ($session.teamId && $session.teamId === teamId) {
+    if ($session.teamId && $session.teamId === team.id) {
       session.pickTeam(null);
     }
   }
@@ -55,7 +55,10 @@
   </div>
 
   <div class="tile is-child">
-    <MemberTable editing on:remove={handleRemoveMember} members={team.members} />
+    <MemberTable
+      editing
+      on:remove={handleRemoveMember}
+      members={team.members} />
   </div>
 </div>
 

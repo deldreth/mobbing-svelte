@@ -23,7 +23,7 @@
 </style>
 
 {#if $timers.remainder > 0}
-  <div id="clock">
+  <div id="clock" data-cy="clock">
     <div class={clockClasses}>{$timers.timer}</div>
   </div>
 {/if}

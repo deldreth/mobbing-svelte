@@ -4,7 +4,7 @@
 
 <div class="tile">
   <div class="tile is-parent">
-    <div class="tile is-child notification is-primary">
+    <div class="tile is-child notification is-primary" data-cy="queue-driver">
       <p class="title">Driver</p>
       {#if $queue.length > 0}
         <p class="subtitle">{$queue[0].name}</p>
@@ -14,7 +14,9 @@
 
   {#if $queue.length > 1}
     <div class="tile is-parent">
-      <div class="tile is-child notification is-info ">
+      <div
+        class="tile is-child notification is-info "
+        data-cy="queue-navigator">
         <p class="title">Navigator</p>
         <p class="subtitle">{$queue[1].name}</p>
       </div>
@@ -30,12 +32,14 @@
 
 {#if $queue.length > 2}
   <div class="tile is-parent">
-    <div class="tile is-child box is-warning">
+    <div class="tile is-child box is-warning" data-cy="queue-deck">
       <p class="title">On Deck</p>
-      {$queue
-        .map(member => member.name)
-        .filter((member, i, s) => s.indexOf(member) === i && i > 1)
-        .join(', ')}
+      <p class="subtitle">
+        {$queue
+          .map(member => member.name)
+          .filter((member, i, s) => s.indexOf(member) === i && i > 1)
+          .join(', ')}
+      </p>
     </div>
   </div>
 {/if}

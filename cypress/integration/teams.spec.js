@@ -78,16 +78,8 @@ describe("Teams", () => {
       cy.get(teamNameInput)
         .clear()
         .type(name);
+      cy.get(saveTeamButton).click();
       cy.get(`${team} .title`).should("contain", name);
-    });
-
-    it("saves the team", () => {
-      const save = cy.get(saveTeamButton);
-      save.click();
-      save.should("not.exist");
-
-      const edit = cy.get(editTeamButton);
-      edit.should("exist");
     });
   });
 

@@ -4,7 +4,7 @@
   export let link = false;
 </script>
 
-<div class="quote tile box is-dark is-block">
+<div class="quote box">
   <p class="text-left">{message}</p>
   <p class="text-right">
     {#if link}

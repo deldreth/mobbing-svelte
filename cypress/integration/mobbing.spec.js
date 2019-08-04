@@ -62,6 +62,7 @@ describe("Mobbing with a team", () => {
     it("should have a default value", () => {
       cy.get(teamSelect)
         .should("exist")
+        .select("MUgfGda1K8SJ1OzZc6Knb")
         .should("have.value", "MUgfGda1K8SJ1OzZc6Knb");
 
       cy.get(teamSelectedMembers).should("have.text", "One, Two, Three, Four");

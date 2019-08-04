@@ -15,3 +15,14 @@ Cypress.Commands.add("setSession", () => {
     window.localStorage.setItem("session", JSON.stringify(fixture))
   );
 });
+
+Cypress.Commands.add("updateTimers", next => {
+  cy.fixture("session.json").then(fixture => {
+    const mergedFixture = {
+      ...fixture,
+      ...next
+    };
+
+    window.localStorage.setItem("timers", JSON.stringify(mergedFixture));
+  });
+});

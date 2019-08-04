@@ -21,26 +21,23 @@
 
   <div class="navbar-menu">
     <div class="navbar-start">
-      {#if $session.activeType !== TYPE_INACTIVE}
-        <a
-          class={segment === 'session' ? 'is-active navbar-item' : 'navbar-item'}
-          href="session">
-          Session
-        </a>
-      {:else}
-        <a
-          class={segment === undefined ? 'is-active navbar-item' : 'navbar-item'}
-          href=".">
-          Mobbing
-        </a>
-        {#if $teams.length > 0}
-          <a
-            class={segment === 'teams' ? 'is-active navbar-item' : 'navbar-item'}
-            href="teams">
-            Teams
-          </a>
-        {/if}
-      {/if}
+      <a
+        class={segment === undefined ? 'is-active navbar-item' : 'navbar-item'}
+        href=".">
+        Mobbing
+      </a>
+
+      <a
+        class={segment === 'teams' ? 'is-active navbar-item' : 'navbar-item'}
+        href="teams">
+        Teams
+      </a>
+
+      <a
+        class={segment === 'session' ? 'is-active navbar-item' : 'navbar-item'}
+        href="session">
+        Session
+      </a>
     </div>
   </div>
 </nav>
