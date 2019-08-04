@@ -1,7 +1,7 @@
 <script>
-  import { teams } from "../components/Team/store";
+  import { teams } from "../components/Teams/store";
 
-  import SelectTeam from "../components/Team/SelectTeam";
+  import SelectTeam from "../components/Teams/Select/Select";
   import SelectTimes from "../components/Timers/SelectTimes";
   import Start from "../components/Start";
 </script>
@@ -10,7 +10,7 @@
   #mobbing {
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 2rem;
+    grid-gap: 1rem;
   }
 </style>
 
@@ -18,7 +18,7 @@
   <title>Mobs</title>
 </svelte:head>
 
-<section id="mobbing">
+<section id="mobbing" class="tile is-ancestor">
   <SelectTeam />
 
   {#if $teams.length > 0}

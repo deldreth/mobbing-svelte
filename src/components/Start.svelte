@@ -6,7 +6,7 @@
     selectedTeamMembers,
     TYPE_SESSION
   } from "../components/Session/store";
-  import { teams } from "../components/Team/store";
+  import { teams } from "../components/Teams/store";
   import { timers } from "../components/Timers/store";
 
   $: disabled = !$session.teamId || $selectedTeamMembers.length < 2;
@@ -44,7 +44,8 @@
   <button
     on:click={startMobbing}
     {disabled}
-    class={`nes-btn ${disabled ? 'is-disabled' : 'is-primary'}`}
+    class="button is-large is-primary"
+    {disabled}
     data-cy="shuffle-start">
     Shuffle & Start
   </button>

@@ -22,17 +22,19 @@
   }
 </style>
 
-<section id="time-select">
-  <h4>Times</h4>
+<section id="time-select" class="tile box is-info is-child">
+  <p class="title">Times</p>
 
-  <div class="timers">
-    <Timers key="session" />
-    <Timers key="breakAfter" />
-    <Timers key="breakDuration" />
-  </div>
+  <section>
+    <div class="timers">
+      <Timers key="session" />
+      <Timers key="breakAfter" />
+      <Timers key="breakDuration" />
+    </div>
 
-  <p class="explainer">
-    Duration will be {$timers['session'].value * $timers['breakAfter'].value}
-    minutes followed by a {$timers['breakDuration'].value} minute break.
-  </p>
+    <p class="explainer">
+      Duration will be {$timers['session'].value * $timers['breakAfter'].value}
+      minutes followed by a {$timers['breakDuration'].value} minute break.
+    </p>
+  </section>
 </section>

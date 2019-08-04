@@ -1,7 +1,7 @@
 import { derived } from "svelte/store";
 
 import { session } from "../Session/store";
-import { teams } from "../Team/store";
+import { teams } from "../Teams/store";
 import { timers } from "../Timers/store";
 
 export const queue = derived(

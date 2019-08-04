@@ -30,18 +30,21 @@
   <div class="group">
     <button
       on:click={handleDecrement}
-      class="nes-btn"
+      disabled={timer.value <= 1}
+      class="button is-light"
       type="button"
       id="button-addon1"
       data-cy={`timer-${key}-minus-button`}>
-      <i class="fas fa-minus fa-fw" />
+      <span class="icon is-small">
+        <i class="fas fa-minus fa-fw" />
+      </span>
     </button>
 
     <input
       value={`${timer.value} ${timer.suffix}`}
       readonly
       type="text"
-      class="nes-input"
+      class="input"
       placeholder=""
       aria-label="Example text with button addon"
       aria-describedby="button-addon1"
@@ -49,11 +52,13 @@
 
     <button
       on:click={handleIncrement}
-      class="nes-btn"
+      class="button is-light"
       type="button"
       id="button-addon2"
       data-cy={`timer-${key}-plus-button`}>
-      <i class="fas fa-plus fa-fw" />
+      <span class="icon is-small">
+        <i class="fas fa-plus fa-fw" />
+      </span>
     </button>
   </div>
 </section>

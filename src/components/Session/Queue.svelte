@@ -1,43 +1,41 @@
 <script>
   import { queue } from "../Queue/store";
-
-  import Break from "./Break";
 </script>
 
-<style>
-  .queue {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 1rem;
-  }
+<div class="tile">
+  <div class="tile is-parent">
+    <div class="tile is-child notification is-primary">
+      <p class="title">Driver</p>
+      {#if $queue.length > 0}
+        <p class="subtitle">{$queue[0].name}</p>
+      {/if}
+    </div>
+  </div>
 
-  .queue section {
-    font-size: 2rem;
-    text-align: center;
-  }
-
-  .ondeck {
-    text-align: center;
-  }
-</style>
-
-<section class="queue">
-  {#if $queue.length > 0}
-    <section class="nes-text is-primary">Driver: {$queue[0].name}</section>
-  {/if}
-
-  {#if $queue.length < 2}
-    <section class="nes-text is-success">Break</section>
-  {:else}
-    <section>Navigator: {$queue[1].name}</section>
-
-    {#if $queue.length > 2}
-      <div class="ondeck text-dark">
-        On deck: {$queue
-          .map(member => member.name)
-          .filter((member, i, s) => s.indexOf(member) === i && i > 1)
-          .join(', ')}
+  {#if $queue.length > 1}
+    <div class="tile is-parent">
+      <div class="tile is-child notification is-info ">
+        <p class="title">Navigator</p>
+        <p class="subtitle">{$queue[1].name}</p>
       </div>
-    {/if}
+    </div>
+  {:else}
+    <div class="tile is-parent">
+      <div class="tile is-child notification is-warning">
+        <p class="title">Break</p>
+      </div>
+    </div>
   {/if}
-</section>
+</div>
+
+{#if $queue.length > 2}
+  <div class="tile is-parent">
+    <div class="tile is-child box is-warning">
+      <p class="title">On Deck</p>
+      {$queue
+        .map(member => member.name)
+        .filter((member, i, s) => s.indexOf(member) === i && i > 1)
+        .join(', ')}
+    </div>
+  </div>
+{/if}

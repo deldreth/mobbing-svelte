@@ -23,60 +23,48 @@
     session.updateType(TYPE_INACTIVE);
     goto("/", { replaceState: true });
   }
+
+  function handlePlay() {
+    timers.start($session.teamId, () => session.increment());
+  }
+
+  function handlePause() {
+    timers.pause();
+  }
 </script>
 
-<style>
-  #actions {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 1rem;
-  }
-
-  @media (min-width: 480px) {
-    #actions {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    .continue {
-      grid-area: 1 / 2 / 2 / 3;
-
-      margin-top: 2rem;
-    }
-
-    .skip {
-      grid-area: 2 / 1 / 3 / 2;
-    }
-
-    .remove {
-      grid-area: 2 / 2 / 3 / 3;
-    }
-
-    .end {
-      grid-area: 2 / 3 / 3 / 4;
-    }
-  }
-</style>
-
-<section id="actions">
-  {#if $timers.remainder === 0}
-    <button on:click={handleContinue} class="continue nes-btn is-primary">
-      Continue
-    </button>
-  {/if}
-
+<div class="has-text-centered">
   {#if $timers.paused || $timers.remainder === 0}
-    <button on:click={handleSkip} class="skip nes-btn btn-sm">
+    <button on:click={handleSkip} class="skip button is-info is-rounded">
       Skip Driver
     </button>
 
     <button
       on:click={handleSkipRemove}
-      class="remove nes-btn is-warning btn-sm">
+      class="remove button is-warning is-rounded">
       Remove Driver
     </button>
 
-    <button on:click={handleEnd} class="end nes-btn is-error btn-sm">
+    <button on:click={handleEnd} class="end button is-danger is-rounded">
       End Session
     </button>
+
+    {#if $timers.remainder === 0}
+      <button
+        on:click={handleContinue}
+        class="continue button is-primary is-rounded">
+        Continue
+      </button>
+    {/if}
   {/if}
-</section>
+
+  {#if $timers.remainder > 0}
+    {#if $timers.paused}
+      <button class="button is-primary is-rounded" on:click={handlePlay}>
+        Continue
+      </button>
+    {:else}
+      <button class="button is-rounded" on:click={handlePause}>Pause</button>
+    {/if}
+  {/if}
+</div>

@@ -1,43 +1,46 @@
 <script>
   import { session, TYPE_INACTIVE } from "./Session/store";
-  import { teams } from "./Team/store";
+  import { teams } from "./Teams/store";
 
   export let segment;
 </script>
 
-<style>
-  .navbar {
-    border-bottom: 4px solid black;
-  }
-</style>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <button
+      role="button"
+      class="navbar-burger burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample">
+      <span aria-hidden="true" />
+      <span aria-hidden="true" />
+      <span aria-hidden="true" />
+    </button>
+  </div>
 
-<nav class="navbar navbar-expand navbar-light bg-light sticky-top">
-  <ul class="navbar-nav">
-    {#if $session.activeType !== TYPE_INACTIVE}
-      <li>
+  <div class="navbar-menu">
+    <div class="navbar-start">
+      {#if $session.activeType !== TYPE_INACTIVE}
         <a
-          class={segment === 'session' ? 'active nav-link' : 'nav-link'}
+          class={segment === 'session' ? 'is-active navbar-item' : 'navbar-item'}
           href="session">
           Session
         </a>
-      </li>
-    {:else}
-      <li class="nav-item">
+      {:else}
         <a
-          class={segment === undefined ? 'active nav-link' : 'nav-link'}
+          class={segment === undefined ? 'is-active navbar-item' : 'navbar-item'}
           href=".">
           Mobbing
         </a>
-      </li>
-      {#if $teams.length > 0}
-        <li class="nav-item">
+        {#if $teams.length > 0}
           <a
-            class={segment === 'teams' ? 'active nav-link' : 'nav-link'}
+            class={segment === 'teams' ? 'is-active navbar-item' : 'navbar-item'}
             href="teams">
             Teams
           </a>
-        </li>
+        {/if}
       {/if}
-    {/if}
-  </ul>
+    </div>
+  </div>
 </nav>

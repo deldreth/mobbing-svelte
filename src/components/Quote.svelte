@@ -4,14 +4,7 @@
   export let link = false;
 </script>
 
-<style>
-  .quote {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-</style>
-
-<div class="quote nes-container is-dark">
+<div class="quote tile box is-dark is-block">
   <p class="text-left">{message}</p>
   <p class="text-right">
     {#if link}

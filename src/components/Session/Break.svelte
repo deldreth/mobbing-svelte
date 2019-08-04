@@ -1,10 +1,10 @@
 <script>
-  import { timers } from "../Timers/store";
+  import { timers } from "../../components/Timers/store";
   import { session, TYPE_SESSION, TYPE_BREAK } from "../Session/store";
 
   import Clock from "../Session/Clock";
 
-  function handleStart() {
+  function handleMob() {
     timers.start($session.teamId, () => session.increment(), {
       resetTimer: true
     });
@@ -13,50 +13,43 @@
     session.updateType(TYPE_SESSION);
   }
 
-  function handleBreak() {
+  function handleStart() {
     timers.break(() => session.reset(), { resetTimer: true });
     session.updateType(TYPE_BREAK);
   }
+
+  function handleContinue() {
+    timers.start($session.teamId, () => session.increment());
+  }
+
+  function handlePause() {
+    timers.pause();
+  }
 </script>
 
-<style>
-  .title {
-    margin-bottom: 0.75em;
-  }
+<section class="has-text-centered">
+  {#if $session.activeType === TYPE_BREAK}
+    <p class="title">Break Time!</p>
 
-  .breaking {
-    font-size: 2em;
-    text-align: center;
-  }
+    <Clock />
 
-  .actions {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 1rem;
-  }
+    {#if $timers.paused}
+      <button class="button is-primary is-rounded" on:click={handleContinue}>
+        Continue
+      </button>
+    {:else}
+      <button class="button is-rounded" on:click={handlePause}>Pause</button>
+    {/if}
+  {/if}
 
-  @media (min-width: 480px) {
-    .actions {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-  }
-</style>
+  {#if $session.activeType === TYPE_SESSION}
+    <p class="title">Take a break?</p>
 
-{#if $session.activeType === TYPE_BREAK}
-  <section class="breaking">Break Time!</section>
-
-  <Clock />
-{/if}
-
-{#if $session.activeType === TYPE_SESSION}
-  <section class="text-center">
-    <h2 class="title">Take a break?</h2>
-
-    <div class="actions">
-      <span />
-      <button on:click={handleStart} class="nes-btn">Continue</button>
-      <button on:click={handleBreak} class="nes-btn is-primary">Break</button>
-      <span />
-    </div>
-  </section>
-{/if}
+    <button on:click={handleMob} class="button is-rounded">
+      Continue Mobbing
+    </button>
+    <button on:click={handleStart} class="button is-primary is-rounded">
+      Break
+    </button>
+  {/if}
+</section>

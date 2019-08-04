@@ -1,6 +1,6 @@
 import { derived, writable } from "svelte/store";
 
-import { teams } from "../Team/store";
+import { teams } from "../Teams/store";
 import persistStore from "../../utils/persistStore";
 
 export const TYPE_INACTIVE = "INACTIVE";

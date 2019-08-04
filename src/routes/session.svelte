@@ -1,6 +1,7 @@
 <script>
   import { queue } from "../components/Queue/store";
   import { session } from "../components/Session/store";
+  import { timers } from "../components/Timers/store";
 
   import Clock from "../components/Session/Clock";
   import Actions from "../components/Session/Actions";
@@ -8,12 +9,22 @@
   import Break from "../components/Session/Break";
 </script>
 
-{#if $queue.length > 0}
-  <Queue />
+<section class="tile is-ancestor">
+  <div class="tile is-vertical">
+    {#if $queue.length > 0}
+      <div class="tile is-vertical">
+        <Queue />
+      </div>
 
-  <Clock />
+      <div class="tile is-child">
+        <Clock />
+      </div>
 
-  <Actions />
-{:else}
-  <Break />
-{/if}
+      <div class="tile is-child">
+        <Actions />
+      </div>
+    {:else}
+      <Break />
+    {/if}
+  </div>
+</section>

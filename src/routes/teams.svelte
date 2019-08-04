@@ -1,8 +1,8 @@
 <script>
-  import { teams } from "../components/Team/store";
+  import { teams } from "../components/Teams/store";
 
   import Quote from "../components/Quote";
-  import Teams from "../components/Team/Teams.svelte";
+  import Teams from "../components/Teams/Teams.svelte";
 </script>
 
 <svelte:head>
